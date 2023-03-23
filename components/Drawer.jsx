@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 export default function Drawer({ open }) {
-  console.log("d:", open);
+  // console.log("d:", open);
   return (
     <aside
       className={`md:hidden w-full mt-[40px] fixed top-0 right-0 bg-white border-b-[1px] transition-top ease-in-out duration-500 z-10 text-gray-400

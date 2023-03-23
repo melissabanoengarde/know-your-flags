@@ -7,7 +7,7 @@ import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 export default function Header() {
   const [open, isOpen] = useState(false);
-  console.log(open);
+  // console.log(open);
 
   return (
     <>
