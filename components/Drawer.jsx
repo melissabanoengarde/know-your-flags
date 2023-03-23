@@ -13,7 +13,7 @@ export default function Drawer({ open }) {
           <Link href="/">Login</Link>
         </li>
         <li className="px-5 py-1 uppercase hover:bg-green-100 cursor-pointer">
-          <Link href="/">Review</Link>
+          <Link href="/countries">Review</Link>
         </li>
       </ul>
       {/* <p className="uppercase text-xs text-gray-400 text-center">Worldflags</p> */}

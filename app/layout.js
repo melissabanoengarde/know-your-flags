@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={ssp.className}>
       <body>
         <Header />
-        <main className="px-5 pt-[40px]">{children}</main>
+        <main className="px-5 md:px-8 lg:px-16 pt-[40px]">{children}</main>
         <Footer />
       </body>
     </html>
