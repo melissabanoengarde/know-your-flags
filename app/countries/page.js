@@ -24,7 +24,7 @@ export default async function Countries() {
           <Link href={`countries/${country.name.common}`}>
             <Card
               country={country.name.common}
-              flagPng={country.flags.png}
+              flagPng={country.flags.svg}
               flagAlt={country.flags.alt}
             />
           </Link>

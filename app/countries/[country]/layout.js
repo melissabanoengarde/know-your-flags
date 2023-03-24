@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function CountryLayout({ children }) {
-  return <div className="bg-green-100">{children}</div>;
+  return <div className="pt-5">{children}</div>;
 }
