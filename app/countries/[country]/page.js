@@ -33,11 +33,18 @@ export default async function Country({ params }) {
 
   return (
     <div>
-      <Image src={flags.png} alt={flags.alt} width={200} height={100} />
+      <h2>{name.common}</h2>
+
+      <div className="relative w-full h-[40vh]">
+        <Image
+          src={flags.png}
+          alt={flags.alt}
+          fill={true}
+          className="object-fill"
+        />
+      </div>
+
       <ul>
-        <li>
-          <h2>{name.common}</h2>
-        </li>
         <li>
           <p>{name.official}</p>
         </li>

@@ -1,3 +1,4 @@
+@import "/node_modules/augmented-ui/augmented-ui.min.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,4 +14,17 @@
 .flagContainer {
   width: 100%;
   height: 70%;
+}
+
+.aui-demo {
+  display: inline-block;
+  width: 110px;
+  height: 110px;
+  margin: 10px;
+  --aug-border: 5px;
+  --aug-inset: 5px;
+  padding: 10px; /* mind the gap */
+  text-align: center;
+  --aug-border-bg: black;
+  --aug-inset-bg: gold;
 }

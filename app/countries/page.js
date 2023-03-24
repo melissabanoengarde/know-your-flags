@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Card } from "@/components";
+import { Card, CardsLayout, CountriesLayout } from "@/components";
 
 const fetchCountries = async () => {
   const res = await fetch(
@@ -15,10 +15,10 @@ const fetchCountries = async () => {
 
 export default async function Countries() {
   const countries = await fetchCountries();
-  // console.log(countries.sort());
 
   return (
-    <>
+    <CardsLayout>
+      {/* <CountriesLayout countries={countries} /> */}
       {countries?.map((country, index) => (
         <div key={index}>
           <Link href={`countries/${country.name.common}`}>
@@ -30,6 +30,6 @@ export default async function Countries() {
           </Link>
         </div>
       ))}
-    </>
+    </CardsLayout>
   );
 }
