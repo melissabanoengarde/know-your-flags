@@ -1,13 +1,21 @@
 import Image from "next/image";
 
 const fetchCountryData = async (name) => {
-  const res = await fetch(`https://restcountries.com/v3.1/name/${name}`);
-  return await res.json();
+  let res = await fetch(
+    `https://restcountries.com/v3.1/name/${name}?fields/name,flags`
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
 };
 
 export default async function Country({ params }) {
-  console.log(params);
+  console.log("params: ", params);
   const data = await fetchCountryData(params.country);
+
   const {
     flags,
     name,
@@ -20,8 +28,8 @@ export default async function Country({ params }) {
     population,
   } = data[0];
 
-  console.log(data[0]);
-  console.log(Object.entries(currencies)[0][1]);
+  // console.log(data[0]);
+  // console.log(capital);
 
   return (
     <div>
@@ -33,17 +41,17 @@ export default async function Country({ params }) {
         <li>
           <p>{name.official}</p>
         </li>
-        <li>Capital: {capital[0]}</li>
-        <li>
+        {/* {capital && <li>Capital: {capital[0]}</li>} */}
+        {/* <li>
           Currencies: {Object.entries(currencies)[0][0]}{" "}
           {Object.entries(currencies)[0][1].symbol},{" "}
           {Object.entries(currencies)[0][1].name}
-        </li>
-        <li>Region: {region}</li>
-        <li>Subegion: {subregion}</li>
+        </li> */}
+        {/* <li>Region: {region}</li>
+        {subregion && <li>Subegion: {subregion}</li>}
         <li>Langues: {Object.values(languages).map((x) => x)}</li>
         <li>Population: {population}</li>
-        <li>Timezones: {timezones.map((x) => x)}</li>
+        <li>Timezones: {timezones.map((x) => x)}</li> */}
       </ul>
     </div>
   );

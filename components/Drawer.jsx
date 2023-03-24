@@ -12,11 +12,14 @@ export default function Drawer({ open }) {
         <li className="px-5 py-1 uppercase hover:bg-green-100 cursor-pointer border-b-[1px]">
           <Link href="/">Login</Link>
         </li>
-        <li className="px-5 py-1 uppercase hover:bg-green-100 cursor-pointer">
+        <li className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100 border-b-[1px]">
           <Link href="/countries">Review</Link>
         </li>
+        <li className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100">
+          <Link href="/about">About</Link>
+        </li>
       </ul>
-      {/* <p className="uppercase text-xs text-gray-400 text-center">Worldflags</p> */}
+      {/* <p className="text-xs text-center text-gray-400 uppercase">Worldflags</p> */}
     </aside>
   );
 }

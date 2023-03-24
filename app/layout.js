@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={ssp.className}>
+    <html lang="en" className={`font-normal ${ssp.className}`}>
       <body>
         <Header />
         <main className="px-5 md:px-8 lg:px-16 pt-[40px]">{children}</main>

@@ -21,9 +21,12 @@ export default function Header() {
         </div>
 
         <div className="hidden md:block">
-          <ul className="uppercase flex gap-3">
+          <ul className="flex gap-5 uppercase">
             <li className="hover:bg-green-100">
               <Link href="/countries">Review</Link>
+            </li>
+            <li className="hover:bg-green-100">
+              <Link href="/about">About</Link>
             </li>
             <li className="hover:bg-green-100">
               <Link href="/">Login</Link>
