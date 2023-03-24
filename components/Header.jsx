@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="header-h w-full border-b-[1px] flex justify-between items-center px-5 md:px-8 lg:px-16 bg-white fixed top-0 left-0 z-20 text-gray-400 text-sm">
+      <header className="header-h w-full border-b-[1px] flex justify-between items-center px-5 md:px-8 lg:px-16 bg-white/70 backdrop-blur-md fixed top-0 left-0 z-20 text-gray-400 text-sm">
         <h1 className="uppercase hover:bg-green-100">
           <Link href="/">Worldflags</Link>
         </h1>
