@@ -15,7 +15,7 @@ const fetchCountries = async () => {
 
 export default async function Countries() {
   const countries = await fetchCountries();
-  // console.log(countries);
+  // console.log(countries.sort());
 
   return (
     <>
