@@ -29,7 +29,7 @@ export default function Header() {
               <Link href="/about">About</Link>
             </li>
             <li className="hover:bg-green-100">
-              <Link href="/">Login</Link>
+              <Link href="/">Play</Link>
             </li>
           </ul>
         </div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Footer() {
   const now = new Date();
   return (
-    <footer className="w-full fixed bottom-3 md:bottom-4 left-0 text-center text-gray-200 text-xs uppercase select-none ">
+    <footer className="fixed left-0 w-full text-xs text-center text-gray-300 uppercase select-none bottom-3 md:bottom-4">
       © {now.getFullYear()} Worldflags, open-sourced on{" "}
       <Link href="#" target="_blank" className="hover:text-green-300">
         GitHub

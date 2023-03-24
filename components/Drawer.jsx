@@ -10,7 +10,7 @@ export default function Drawer({ open }) {
     >
       <ul className="text-sm">
         <li className="px-5 py-1 uppercase hover:bg-green-100 cursor-pointer border-b-[1px]">
-          <Link href="/">Login</Link>
+          <Link href="/">Play</Link>
         </li>
         <li className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100 border-b-[1px]">
           <Link href="/countries">Review</Link>

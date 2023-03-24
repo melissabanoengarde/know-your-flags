@@ -16,6 +16,9 @@ const fetchCountries = async () => {
 export default async function Countries() {
   const countries = await fetchCountries();
 
+  // const alphabeticalOrder = Object.values(countries.name).sort();
+  // console.log(alphabeticalOrder);
+
   return (
     <CardsLayout>
       {/* <CountriesLayout countries={countries} /> */}
