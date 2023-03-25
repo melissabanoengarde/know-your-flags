@@ -9,6 +9,7 @@ import { UserAuth } from "@/context/AuthContext";
 
 export default function Header() {
   const [open, isOpen] = useState(false);
+
   const { user } = UserAuth();
 
   return (

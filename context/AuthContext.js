@@ -30,14 +30,14 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const logout = onAuthStateChanged(auth, (userInSession) => {
+    const unsubscribe = onAuthStateChanged(auth, (userInSession) => {
       setUser(userInSession);
       console.log(userInSession);
     });
 
     // Returns a function that calls the unsubscribe function when the component unmounts.
     return () => {
-      logout;
+      unsubscribe;
     };
   }, []);
 
