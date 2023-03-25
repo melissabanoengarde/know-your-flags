@@ -1,13 +1,20 @@
 "use client";
 
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 import { auth } from "@/config/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signOut,
+  onAuthStateChanged, // checks if user is logged in
+} from "firebase/auth";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
+  const [user, setUser] = useState({});
+
   const register = async (name, email, password) => {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
@@ -18,8 +25,26 @@ export const AuthContextProvider = ({ children }) => {
     return await updateProfile(user, { displayName: name });
   };
 
+  const logout = () => {
+    return signOut(auth);
+  };
+
+  useEffect(() => {
+    const logout = onAuthStateChanged(auth, (userInSession) => {
+      setUser(userInSession);
+      console.log(userInSession);
+    });
+
+    // Returns a function that calls the unsubscribe function when the component unmounts.
+    return () => {
+      logout;
+    };
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ register }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, register, logout }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
 import { Drawer } from ".";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
+import { UserAuth } from "@/context/AuthContext";
+
 export default function Header() {
   const [open, isOpen] = useState(false);
-  // console.log(open);
+  const { user } = UserAuth();
 
   return (
     <>
@@ -29,7 +31,14 @@ export default function Header() {
               <Link href="/about">About</Link>
             </li>
             <li className="hover:bg-green-100">
-              <Link href="/">Play</Link>
+              {user ? (
+                <span className="cursor-pointer">
+                  {/* dropdown menu of dashboard/account, logout btn */}
+                  Hi {user.displayName}
+                </span>
+              ) : (
+                <Link href="/">Play</Link>
+              )}
             </li>
           </ul>
         </div>
