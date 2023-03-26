@@ -1,3 +1,5 @@
+"use client";
+
 import { UserCard } from "@/components";
 import { UserAuth } from "@/context/AuthContext";
 

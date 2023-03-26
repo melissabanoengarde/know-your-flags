@@ -8,7 +8,10 @@ import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 import GoogleConnectBtn from "./GoogleConnectBtn";
 import UserCard from "./UserCard";
-import Tags from "./Tags";
+// Game
+import GameContainer from "./Game/GameContainer";
+import Tags from "./Game/Tags";
+import Intro from "./Game/Intro";
 
 export {
   Header,
@@ -22,4 +25,6 @@ export {
   GoogleConnectBtn,
   UserCard,
   Tags,
+  GameContainer,
+  Intro,
 };

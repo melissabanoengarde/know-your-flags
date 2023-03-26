@@ -29,7 +29,7 @@ export default function RegisterForm({ btnText }) {
       try {
         await register(form.name, form.email, form.password);
         setLoading(false);
-        router.push("/countries");
+        router.push("/game");
       } catch (error) {
         setError(error.message);
         console.log(error);

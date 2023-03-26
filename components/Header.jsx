@@ -10,9 +10,9 @@ import { UserAuth } from "@/context/AuthContext";
 export default function Header() {
   const [open, isOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  console.log(showMenu);
 
   const { user } = UserAuth();
+  console.log(user);
 
   return (
     <>
@@ -25,7 +25,7 @@ export default function Header() {
           {open ? <IoMdClose size={20} /> : <IoMdMenu size={20} />}
         </div>
 
-        <div className="hidden md:flex items-center ">
+        <div className="items-center hidden md:flex ">
           <ul className="flex gap-5 uppercase">
             <li className="hover:bg-green-100">
               <Link href="/countries">Review</Link>
@@ -48,6 +48,7 @@ export default function Header() {
           </ul>
         </div>
       </header>
+
       <Drawer open={open} />
       <Menu showMenu={showMenu} user={user} />
     </>

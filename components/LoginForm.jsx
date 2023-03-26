@@ -28,7 +28,7 @@ export default function LoginForm() {
       try {
         await login(form.email, form.password);
         setLoading(false);
-        router.push("/countries");
+        router.push("/game");
       } catch (error) {
         setError(error.message);
         console.log(error);

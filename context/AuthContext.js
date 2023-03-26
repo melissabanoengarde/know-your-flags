@@ -18,7 +18,7 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   // Tracks user
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const router = useRouter();
 
   const register = async (name, email, password) => {
@@ -59,14 +59,16 @@ export const AuthContextProvider = ({ children }) => {
         setUser(userInSession);
         console.log(userInSession);
       } else {
-        setUser(null);
-        router.push("/");
+        setUser({});
+        router.push("/login");
       }
     });
 
     // Returns a function that calls the unsubscribe function when the component unmounts.
-    return () => unsubscribe();
-  }, [user, router]);
+    return () => {
+      unsubscribe;
+    };
+  }, []);
 
   return (
     <AuthContext.Provider
