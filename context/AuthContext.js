@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { auth } from "@/config/firebase";
 import {
@@ -17,7 +18,8 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   // Tracks user
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
+  const router = useRouter();
 
   const register = async (name, email, password) => {
     const userCredential = await createUserWithEmailAndPassword(
@@ -53,15 +55,18 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (userInSession) => {
-      setUser(userInSession);
-      console.log(userInSession);
+      if (user) {
+        setUser(userInSession);
+        console.log(userInSession);
+      } else {
+        setUser(null);
+        router.push("/");
+      }
     });
 
     // Returns a function that calls the unsubscribe function when the component unmounts.
-    return () => {
-      unsubscribe;
-    };
-  }, []);
+    return () => unsubscribe();
+  }, [user, router]);
 
   return (
     <AuthContext.Provider

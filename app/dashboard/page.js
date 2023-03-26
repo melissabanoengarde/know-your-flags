@@ -1,14 +1,16 @@
-"use client";
-
 import { UserCard } from "@/components";
-import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { UserAuth } from "@/context/AuthContext";
 
-function Dashboard() {
+export default function Dashboard() {
+  const { user } = UserAuth();
+
+  if (!user) {
+    return null;
+  }
+
   return (
     <div>
       <UserCard />
     </div>
   );
 }
-
-export default ProtectedRoute(Dashboard);

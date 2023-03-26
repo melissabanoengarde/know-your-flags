@@ -8,6 +8,7 @@ import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 import GoogleConnectBtn from "./GoogleConnectBtn";
 import UserCard from "./UserCard";
+import Tags from "./Tags";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   LoginForm,
   GoogleConnectBtn,
   UserCard,
+  Tags,
 };
