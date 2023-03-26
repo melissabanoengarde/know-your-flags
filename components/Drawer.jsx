@@ -1,8 +1,15 @@
 import Link from "next/link";
 import { UserAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function Drawer({ open }) {
-  const { user } = UserAuth();
+  const { user, logout } = UserAuth();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logout();
+    router.push("/");
+  };
 
   return (
     <aside
@@ -10,8 +17,19 @@ export default function Drawer({ open }) {
         ${open ? "top-[0px]" : "top-[-1000px]"}`}
     >
       <ul className="text-sm">
-        <li className="px-5 py-1 uppercase hover:bg-green-100 cursor-pointer border-b-[1px]">
-          <Link href="/account">{!user ? "Play" : `${user.displayName}`}</Link>
+        <li
+          className={`px-5 py-1 uppercase hover:bg-green-100 cursor-pointer border-b-[1px] ${
+            user && `flex items-center justify-between`
+          }`}
+        >
+          {!user ? (
+            <Link href="/login">Play</Link>
+          ) : (
+            <>
+              <Link href="/account">Dashboard</Link>{" "}
+              <p className="text-xs">{user.displayName}</p>
+            </>
+          )}
         </li>
         <li className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100 border-b-[1px]">
           <Link href="/countries">Review</Link>
@@ -19,6 +37,14 @@ export default function Drawer({ open }) {
         <li className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100">
           <Link href="/about">About</Link>
         </li>
+        {user && (
+          <li
+            className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100 border-t-[1px]"
+            onClick={handleLogout}
+          >
+            Logout
+          </li>
+        )}
       </ul>
       {/* <p className="text-xs text-center text-gray-400 uppercase">Worldflags</p> */}
     </aside>
