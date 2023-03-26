@@ -6,6 +6,9 @@ import { auth } from "@/config/firebase";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged, // checks if user is logged in
 } from "firebase/auth";
@@ -13,6 +16,7 @@ import {
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
+  // Tracks user
   const [user, setUser] = useState({});
 
   const register = async (name, email, password) => {
@@ -23,6 +27,24 @@ export const AuthContextProvider = ({ children }) => {
     );
     const { user } = userCredential;
     return await updateProfile(user, { displayName: name });
+  };
+
+  const login = async (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const googleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const userCredential = GoogleAuthProvider.credentialFromResult(result);
+      console.log("user in session", result.user);
+      console.log("acctoken", userCredential.accessToken);
+    } catch (error) {
+      const userCredential = GoogleAuthProvider.credentialFromError(error);
+      console.log(error, userCredential);
+    }
   };
 
   const logout = () => {
@@ -42,7 +64,9 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, register, logout }}>
+    <AuthContext.Provider
+      value={{ user, register, login, googleLogin, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
