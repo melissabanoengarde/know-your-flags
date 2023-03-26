@@ -7,6 +7,7 @@ import CardsLayout from "./CardsLayout";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 import GoogleConnectBtn from "./GoogleConnectBtn";
+import UserCard from "./UserCard";
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   RegisterForm,
   LoginForm,
   GoogleConnectBtn,
+  UserCard,
 };
