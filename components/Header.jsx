@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Drawer } from ".";
+import { Drawer, Menu } from ".";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 import { UserAuth } from "@/context/AuthContext";
 
 export default function Header() {
   const [open, isOpen] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  console.log(showMenu);
 
   const { user } = UserAuth();
 
@@ -23,7 +25,7 @@ export default function Header() {
           {open ? <IoMdClose size={20} /> : <IoMdMenu size={20} />}
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center ">
           <ul className="flex gap-5 uppercase">
             <li className="hover:bg-green-100">
               <Link href="/countries">Review</Link>
@@ -33,18 +35,21 @@ export default function Header() {
             </li>
             <li className="hover:bg-green-100">
               {user ? (
-                <span className="cursor-pointer">
-                  {/* dropdown menu of dashboard/account, logout btn */}
-                  Hi {user.displayName}
-                </span>
+                <p
+                  onClick={() => setShowMenu(!showMenu)}
+                  className="cursor-pointer"
+                >
+                  {user.displayName}
+                </p>
               ) : (
-                <Link href="/">Play</Link>
+                <Link href="/login">Play</Link>
               )}
             </li>
           </ul>
         </div>
       </header>
       <Drawer open={open} />
+      <Menu showMenu={showMenu} user={user} />
     </>
   );
 }

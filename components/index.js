@@ -1,6 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Drawer from "./Drawer";
+import Menu from "./Menu";
 import Card from "./Card";
 import CardsLayout from "./CardsLayout";
 import RegisterForm from "./RegisterForm";
@@ -11,6 +12,7 @@ export {
   Header,
   Footer,
   Drawer,
+  Menu,
   Card,
   CardsLayout,
   RegisterForm,

@@ -26,8 +26,8 @@ export default function Drawer({ open }) {
             <Link href="/login">Play</Link>
           ) : (
             <>
-              <Link href="/account">Dashboard</Link>{" "}
-              <p className="text-xs">{user.displayName}</p>
+              <Link href="/dashboard">Dashboard</Link>{" "}
+              <p className="text-xs select-none">{user.displayName}</p>
             </>
           )}
         </li>
