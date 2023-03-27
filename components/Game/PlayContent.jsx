@@ -7,22 +7,20 @@ import Image from "next/image";
 export default function PlayContent({ countries }) {
   const [score, setScore] = useState(0);
   const [tries, setTries] = useState(2);
+  const [time, setTime] = useState(60);
   const [answer, setAnswer] = useState(null);
   const [guessList, setGuessList] = useState(null);
-
-  // console.log(chances);
 
   const handleRound = (e) => {
     const selected = e.target.innerHTML;
 
-    // console.table("ANSWER", answer && answer.name.common);
-    // console.table("selected", selected);
-
     if (selected === answer.name.common) {
       setScore(score + 1);
+      setTime(time + 5);
       generateAnswer();
     } else {
       setScore(score - 1);
+      setTime(time - 5);
       // if on the last (1) chance the answer is wrong... (to explain why condition is not at 0)
       if (tries === 1) {
         // 0ms delay to ensure that it gets executed after the current render cycle, which allows the 'tries' state to update first.
@@ -47,6 +45,20 @@ export default function PlayContent({ countries }) {
     setTries(2);
   };
 
+  useEffect(() => {
+    let intervalValue;
+    if (time > 0) {
+      intervalValue = setTimeout(() => {
+        setTime(time - 1);
+        console.log(time);
+      }, 1000);
+    } else {
+      clearTimeout(intervalValue);
+      console.log("GAME OVERRRRRR");
+    }
+    return () => clearTimeout(intervalValue); // clears interval on update
+  }, [time]);
+
   // Ensures that answer remains the same value since useState is async
   useEffect(() => {
     if (answer) {
@@ -69,12 +81,13 @@ export default function PlayContent({ countries }) {
         <p>Loading.....</p>
       ) : (
         <>
-          <Board score={score} tries={tries} />
+          <Board score={score} tries={tries} time={time} />
           <div className="relative w-full h-[14rem] sm:h-[18rem]">
             <Image
               src={answer && answer.flags.svg}
               fill={true}
-              className="object-fill w-full h-auto border" // TODO: display right click
+              className={`object-fill w-full h-auto border`}
+              // TODO: display right click
               alt="Flag to guess!"
             />
           </div>
