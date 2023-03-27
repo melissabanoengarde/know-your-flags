@@ -14,6 +14,9 @@ import {
   onAuthStateChanged, // checks if user is logged in
 } from "firebase/auth";
 
+import { db } from "@/config/firebase";
+import { doc, setDoc } from "firebase/firestore";
+
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
@@ -21,13 +24,20 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const router = useRouter();
 
-  const register = async (name, email, password) => {
+  const register = async (name, username, email, password) => {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
     const { user } = userCredential;
+
+    // store username
+    const userRef = doc(db, "users", user.email);
+    await setDoc(userRef, {
+      username: username,
+    });
+
     return await updateProfile(user, { displayName: name });
   };
 
@@ -57,7 +67,7 @@ export const AuthContextProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (userInSession) => {
       if (user) {
         setUser(userInSession);
-        console.log(userInSession);
+        console.log("AuthContext", userInSession);
       } else {
         setUser({});
         router.push("/login");

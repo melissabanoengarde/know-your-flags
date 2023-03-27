@@ -2,7 +2,7 @@ import Link from "next/link";
 import { UserAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
-export default function Drawer({ open }) {
+export default function Drawer({ open, isOpen }) {
   const { user, logout } = UserAuth();
   const router = useRouter();
 
@@ -16,7 +16,14 @@ export default function Drawer({ open }) {
       className={`md:hidden w-full mt-[40px] fixed top-0 right-0 bg-white border-b-[1px] transition-top ease-in-out duration-500 z-10 text-gray-400
         ${open ? "top-[0px]" : "top-[-1000px]"}`}
     >
-      <ul className="text-sm">
+      <ul
+        className="text-sm"
+        onClick={() =>
+          setTimeout(() => {
+            isOpen(!open);
+          }, 500)
+        }
+      >
         <li
           className={`px-5 py-1 uppercase hover:bg-green-100 cursor-pointer border-b-[1px] ${
             user && `flex items-center justify-between`

@@ -10,6 +10,7 @@ export default function PlayContent({ countries }) {
   const [time, setTime] = useState(60);
   const [answer, setAnswer] = useState(null);
   const [guessList, setGuessList] = useState(null);
+  // const [correct, setCorrect] = useState(null);
 
   const handleRound = (e) => {
     const selected = e.target.innerHTML;
@@ -17,10 +18,12 @@ export default function PlayContent({ countries }) {
     if (selected === answer.name.common) {
       setScore(score + 1);
       setTime(time + 5);
+      // setCorrect(true);
       generateAnswer();
     } else {
       setScore(score - 1);
       setTime(time - 5);
+      // setCorrect(false);
       // if on the last (1) chance the answer is wrong... (to explain why condition is not at 0)
       if (tries === 1) {
         // 0ms delay to ensure that it gets executed after the current render cycle, which allows the 'tries' state to update first.
@@ -43,6 +46,7 @@ export default function PlayContent({ countries }) {
     const randomIndex = Math.floor(Math.random() * countries.length);
     setAnswer(countries[randomIndex]);
     setTries(2);
+    // setCorrect(null);
   };
 
   useEffect(() => {
@@ -50,7 +54,7 @@ export default function PlayContent({ countries }) {
     if (time > 0) {
       intervalValue = setTimeout(() => {
         setTime(time - 1);
-        console.log(time);
+        // console.log(time);
       }, 1000);
     } else {
       clearTimeout(intervalValue);
@@ -72,8 +76,7 @@ export default function PlayContent({ countries }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // console.table("ANSWER", answer && answer.name.common);
-  // console.log(chances);
+  // console.log(correct);
 
   return (
     <>
@@ -83,10 +86,14 @@ export default function PlayContent({ countries }) {
         <>
           <Board score={score} tries={tries} time={time} />
           <div className="relative w-full h-[14rem] sm:h-[18rem]">
+            {/* <div
+              className={`z-20 w-full h-full
+              }`}
+            /> */}
             <Image
               src={answer && answer.flags.svg}
               fill={true}
-              className={`object-fill w-full h-auto border`}
+              className={`object-fill w-full h-auto border z-10`}
               // TODO: display right click
               alt="Flag to guess!"
             />

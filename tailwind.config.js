@@ -6,7 +6,14 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        guessBehaviour: { "0%": { opacity: 1 }, "100%": { opacity: 0 } },
+      },
+      animation: {
+        guessBehaviour: "guessBehaviour 0.5s ease-in-out",
+      },
+    },
   },
   plugins: [],
 };

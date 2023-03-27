@@ -6,9 +6,13 @@ import InputField from "./InputField";
 import { UserAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
+import { db } from "@/config/firebase";
+import { doc, setDoc } from "firebase/firestore";
+
 export default function RegisterForm({ btnText }) {
   const [form, setForm] = useState({
     name: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -21,13 +25,13 @@ export default function RegisterForm({ btnText }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("*submitted*");
+    // console.log("*submitted*");
 
-    if (form.name && form.email && form.password) {
+    if (form.name && form.username && form.email && form.password) {
       setLoading(true);
 
       try {
-        await register(form.name, form.email, form.password);
+        await register(form.name, form.username, form.email, form.password);
         setLoading(false);
         router.push("/game");
       } catch (error) {
@@ -43,7 +47,7 @@ export default function RegisterForm({ btnText }) {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    console.log(e.target.name);
+    // console.log(e.target.name);
   };
 
   return (
@@ -51,13 +55,23 @@ export default function RegisterForm({ btnText }) {
       {error && <p className="text-xs text-red-300">{error}</p>}
 
       <form className="flex flex-col w-full gap-2" onSubmit={handleSubmit}>
-        <InputField
-          type="text"
-          name="name"
-          value={form.name}
-          placeholder="Name"
-          handleChange={handleChange}
-        />
+        <div className="flex gap-2">
+          <InputField
+            type="text"
+            name="name"
+            value={form.name}
+            placeholder="Name"
+            handleChange={handleChange}
+          />
+          <InputField
+            type="text"
+            name="username"
+            value={form.username}
+            placeholder="Username"
+            handleChange={handleChange}
+          />
+        </div>
+
         <InputField
           type="email"
           name="email"
@@ -80,18 +94,3 @@ export default function RegisterForm({ btnText }) {
     </>
   );
 }
-
-// name + username
-// const [username, setUsername] = useState("");
-/* <div className="flex gap-2">
-        <InputField
-          type="text"
-          placeholder="Name"
-          onChange={() => setName(e.target.value)}
-        />
-        <InputField
-          type="text"
-          placeholder="Username"
-          onChange={() => setUsername(e.target.value)}
-        />
-      </div> */

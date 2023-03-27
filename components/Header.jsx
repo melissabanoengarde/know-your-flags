@@ -7,6 +7,9 @@ import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 import { UserAuth } from "@/context/AuthContext";
 
+import { db } from "@/config/firebase";
+import { doc, setDoc } from "@/context/AuthContext";
+
 export default function Header() {
   const [open, isOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -49,7 +52,7 @@ export default function Header() {
         </div>
       </header>
 
-      <Drawer open={open} />
+      <Drawer open={open} isOpen={isOpen} />
       <Menu showMenu={showMenu} user={user} />
     </>
   );
