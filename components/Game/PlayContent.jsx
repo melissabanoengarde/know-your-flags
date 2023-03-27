@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Tags from "./Tags";
 import Image from "next/image";
 
 export default function PlayContent({ countries }) {
@@ -24,32 +25,47 @@ export default function PlayContent({ countries }) {
     if (answer) {
       handleGuesses(answer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answer]);
 
   useEffect(() => {
     generateAnswer();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log("GUESSLIST", guessList);
   console.log("ANSWER", answer && answer.name.common);
 
   return (
-    <div className="w-full h-full">
-      {!answer ? (
+    <>
+      {!answer && !guessList ? (
         <p>Loading.....</p>
       ) : (
         <>
           <div className="relative  w-full h-[14rem] sm:h-[18rem]">
             <Image
-              src={answer.flags.svg}
+              src={answer && answer.flags.svg}
               fill={true}
               className="object-fill w-full h-auto border" // TODO: display right click
               alt="Flag to guess!"
             />
           </div>
-          <div>tags</div>
+          <div className="grid grid-cols-2 grid-rows-2 gap-2">
+            {guessList &&
+              guessList.map((guess, index) => (
+                <Tags name={guess.name.common} key={index} />
+              ))}
+          </div>
         </>
       )}
-    </div>
+    </>
   );
 }
+
+// Gameover === 0s
+// Next round === 0 chances
+// Each round === 2 chances
+
+// Start with 30 seconds
+// When user scores correct => +5s, +1pt, 0 chances, next round
+// When user scores incorrect => -5s, -1px, -1 chance,
