@@ -12,6 +12,7 @@ import UserCard from "./UserCard";
 import GameContainer from "./Game/GameContainer";
 import Tags from "./Game/Tags";
 import Intro from "./Game/Intro";
+import PlayContent from "./Game/PlayContent";
 
 export {
   Header,
@@ -27,4 +28,5 @@ export {
   Tags,
   GameContainer,
   Intro,
+  PlayContent,
 };
