@@ -15,7 +15,7 @@ const fetchCountries = async () => {
 export default async function Play() {
   const countries = await fetchCountries();
   return (
-    <section className="w-full border border-red-200 subtract-header-height">
+    <section className="w-full subtract-header-height">
       <GameContainer>
         <PlayContent countries={countries} />
       </GameContainer>
