@@ -10,22 +10,24 @@ import { doc, getDoc } from "firebase/firestore";
 export default function useFetchUserInfo() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [infos, setInfos] = useState(null);
+  const [infos, setInfos] = useState({ username: "" });
 
   const { user } = UserAuth();
 
-  console.log("📍 hiiiiii");
+  // console.log("📍 hiiiiii");
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("📍 from fetchData");
+      // console.log("📍 from fetchData");
 
       try {
-        const document = doc(db, "users", user.uid);
-        const snapshot = await getDoc(document);
+        const docRef = doc(db, "users", user.email);
+        const docSnap = await getDoc(docRef);
 
-        if (snapshot.exists()) {
-          setInfos(snapshot.data().username);
+        if (docSnap.exists()) {
+          setInfos({ ...infos, username: docSnap.data().username });
+        } else {
+          setInfos(null);
         }
       } catch (error) {
         setError("Failed to load user information");
@@ -35,7 +37,7 @@ export default function useFetchUserInfo() {
       }
     };
     fetchData();
-  }, [user.uid]);
+  }, [user.email]);
 
   return { loading, error, infos, setInfos };
 }

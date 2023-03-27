@@ -1,55 +1,112 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { UserAuth } from "@/context/AuthContext";
 
-import { doc, setDoc, deleteField } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/config/firebase";
-
 import useFetchUserInfo from "@/hooks/fetchUserInfo";
 
+import { BiCheck, BiX } from "react-icons/bi";
+import { MdModeEditOutline } from "react-icons/md";
+
 export default function UserCard() {
-  const [info, setInfo] = useState("");
+  const { infos } = useFetchUserInfo();
+
+  const [username, setUsername] = useState("");
+  const [updatedUsername, setUpdatedUsername] = useState("");
+  const [editing, setEditing] = useState(false);
+
   const router = useRouter();
   const { user } = UserAuth();
 
-  if (!user) {
-    router.push("/login");
-  }
+  useEffect(() => {
+    setUsername(infos.username);
+    setUpdatedUsername(infos.username);
 
-  const { infos, loading, error } = useFetchUserInfo();
-  console.log("fromUSERCARD", infos);
+    if (!user) {
+      router.push("/login");
+    }
+  }, [infos.username, user, router]);
 
-  // const createdAt = user.metadata?.createdAt;
-  // const date = createdAt ? new Date(createdAt) : null;
+  const updateDbUsername = async () => {
+    const docRef = doc(db, "users", user.email);
+    await setDoc(docRef, { username: updatedUsername });
+  };
+
+  const cancelUpdateUsername = () => {
+    setUpdatedUsername(username);
+    setEditing(false);
+  };
 
   return (
     <>
       {user && (
-        <section className="flex flex-col gap-7">
+        <section className="flex flex-col pt-8 text-gray-400 uppercase gap-7">
           {/* Username */}
           <div>
-            <small>Username</small>
-            <p></p>
+            <small className="text-xs select-none">Username</small>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setEditing(false);
+                updateDbUsername();
+              }}
+            >
+              <div
+                className={`flex items-center justify-between gap-3 ${
+                  editing ? "border-b-[1px] border-gray-300" : ""
+                }`}
+              >
+                <input
+                  type="text"
+                  name="username"
+                  className="w-3/5 outline-none cursor-default "
+                  value={updatedUsername}
+                  onChange={(e) => setUpdatedUsername(e.target.value)}
+                  readOnly={!editing}
+                />
+                {!editing ? (
+                  <div className="cursor-pointer">
+                    <MdModeEditOutline
+                      size={18}
+                      onClick={() => {
+                        setEditing(true);
+                      }}
+                      className="h-full hover:text-gray-500"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex duration-100">
+                    <BiCheck
+                      className="cursor-pointer hover:text-green-500/50"
+                      size={22}
+                      onClick={() => {
+                        setEditing(false);
+                        updateDbUsername();
+                      }}
+                    />
+                    <BiX
+                      className="cursor-pointer hover:text-gray-500"
+                      size={22}
+                      onClick={cancelUpdateUsername}
+                    />
+                  </div>
+                )}
+              </div>
+            </form>
           </div>
 
           {/* Name */}
           <div>
-            <small>Name</small>
-            <input
-              type="text"
-              name="name"
-              // value={user.displayName}
-              value="nameName"
-              defaultValue="nameName"
-              className="block border outline-none"
-            />
+            <small className="text-xs select-none">Name</small>
+            <p>{user.displayName}</p>
           </div>
 
           {/* Email */}
           <div>
-            <small>Email</small>
+            <small className="text-xs select-none">Email</small>
             <p>{user.email}</p>
           </div>
         </section>
