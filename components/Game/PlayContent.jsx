@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Board from "./Board";
 import Image from "next/image";
 
 export default function PlayContent({ countries }) {
@@ -52,7 +53,7 @@ export default function PlayContent({ countries }) {
         <p>Loading.....</p>
       ) : (
         <>
-          <div className="w-full">Score: {score}</div>
+          <Board score={score} />
           <div className="relative w-full h-[14rem] sm:h-[18rem]">
             <Image
               src={answer && answer.flags.svg}
