@@ -6,19 +6,31 @@ import Image from "next/image";
 
 export default function PlayContent({ countries }) {
   const [score, setScore] = useState(0);
+  const [tries, setTries] = useState(2);
   const [answer, setAnswer] = useState(null);
   const [guessList, setGuessList] = useState(null);
+
+  // console.log(chances);
 
   const handleRound = (e) => {
     const selected = e.target.innerHTML;
 
-    console.log("ANSWER", answer && answer.name.common);
-    console.log(selected);
+    // console.table("ANSWER", answer && answer.name.common);
+    // console.table("selected", selected);
 
-    if (selected === answer.name.common && selected !== null) {
+    if (selected === answer.name.common) {
       setScore(score + 1);
+      generateAnswer();
     } else {
       setScore(score - 1);
+      // if on the last (1) chance the answer is wrong... (to explain why condition is not at 0)
+      if (tries === 1) {
+        // 0ms delay to ensure that it gets executed after the current render cycle, which allows the 'tries' state to update first.
+        setTimeout(() => {
+          generateAnswer();
+        }, 0);
+      }
+      setTries(tries - 1);
     }
   };
 
@@ -32,6 +44,7 @@ export default function PlayContent({ countries }) {
   const generateAnswer = () => {
     const randomIndex = Math.floor(Math.random() * countries.length);
     setAnswer(countries[randomIndex]);
+    setTries(2);
   };
 
   // Ensures that answer remains the same value since useState is async
@@ -47,13 +60,16 @@ export default function PlayContent({ countries }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // console.table("ANSWER", answer && answer.name.common);
+  // console.log(chances);
+
   return (
     <>
       {!answer && !guessList ? (
         <p>Loading.....</p>
       ) : (
         <>
-          <Board score={score} />
+          <Board score={score} tries={tries} />
           <div className="relative w-full h-[14rem] sm:h-[18rem]">
             <Image
               src={answer && answer.flags.svg}
