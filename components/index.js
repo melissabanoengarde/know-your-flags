@@ -13,6 +13,9 @@ import GameContainer from "./Game/GameContainer";
 import Tags from "./Game/Tags";
 import Intro from "./Game/Intro";
 import PlayContent from "./Game/PlayContent";
+// Home
+import HomeContainer from "./Root/HomeContainer";
+import Scene from "./Root/Scene";
 
 export {
   Header,
@@ -29,4 +32,6 @@ export {
   GameContainer,
   Intro,
   PlayContent,
+  HomeContainer,
+  Scene,
 };
