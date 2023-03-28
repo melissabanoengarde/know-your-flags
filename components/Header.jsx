@@ -7,15 +7,12 @@ import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 import { UserAuth } from "@/context/AuthContext";
 
-import { db } from "@/config/firebase";
-import { doc, setDoc } from "@/context/AuthContext";
-
 export default function Header() {
   const [open, isOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
   const { user } = UserAuth();
-  console.log(user);
+  // console.log(user);
 
   return (
     <>
@@ -36,6 +33,11 @@ export default function Header() {
             <li className="hover:bg-green-100">
               <Link href="/about">About</Link>
             </li>
+            {user && (
+              <li className="hover:bg-green-100">
+                <Link href="/game">Play</Link>
+              </li>
+            )}
             <li className="hover:bg-green-100">
               {user ? (
                 <p

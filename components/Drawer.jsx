@@ -2,9 +2,13 @@ import Link from "next/link";
 import { UserAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
+import useFetchUserInfo from "@/hooks/fetchUserInfo";
+
 export default function Drawer({ open, isOpen }) {
   const { user, logout } = UserAuth();
   const router = useRouter();
+
+  const { infos } = useFetchUserInfo();
 
   const handleLogout = async () => {
     await logout();
@@ -34,10 +38,15 @@ export default function Drawer({ open, isOpen }) {
           ) : (
             <>
               <Link href="/dashboard">Dashboard</Link>{" "}
-              <p className="text-xs select-none">{user.displayName}</p>
+              <p className="text-xs select-none">{infos.username}</p>
             </>
           )}
         </li>
+        {user && (
+          <li className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100 border-b-[1px]">
+            <Link href="/game">Play</Link>
+          </li>
+        )}
         <li className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100 border-b-[1px]">
           <Link href="/countries">Review</Link>
         </li>
@@ -53,7 +62,6 @@ export default function Drawer({ open, isOpen }) {
           </li>
         )}
       </ul>
-      {/* <p className="text-xs text-center text-gray-400 uppercase">Worldflags</p> */}
     </aside>
   );
 }

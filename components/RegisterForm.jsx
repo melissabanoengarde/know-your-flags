@@ -6,9 +6,6 @@ import InputField from "./InputField";
 import { UserAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
-import { db } from "@/config/firebase";
-import { doc, setDoc } from "firebase/firestore";
-
 export default function RegisterForm({ btnText }) {
   const [form, setForm] = useState({
     name: "",
@@ -25,7 +22,6 @@ export default function RegisterForm({ btnText }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("*submitted*");
 
     if (form.name && form.username && form.email && form.password) {
       setLoading(true);
@@ -47,7 +43,6 @@ export default function RegisterForm({ btnText }) {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    // console.log(e.target.name);
   };
 
   return (

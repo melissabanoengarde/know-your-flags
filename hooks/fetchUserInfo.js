@@ -14,12 +14,8 @@ export default function useFetchUserInfo() {
 
   const { user } = UserAuth();
 
-  // console.log("📍 hiiiiii");
-
   useEffect(() => {
     const fetchData = async () => {
-      // console.log("📍 from fetchData");
-
       try {
         const docRef = doc(db, "users", user.email);
         const docSnap = await getDoc(docRef);
@@ -37,7 +33,7 @@ export default function useFetchUserInfo() {
       }
     };
     fetchData();
-  }, [user.email]);
+  }, [user]);
 
   return { loading, error, infos, setInfos };
 }

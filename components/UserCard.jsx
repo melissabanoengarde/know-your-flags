@@ -43,7 +43,7 @@ export default function UserCard() {
   return (
     <>
       {user && (
-        <section className="flex flex-col pt-8 text-gray-400 uppercase gap-7">
+        <section className="flex flex-col w-full pt-8 text-gray-400 uppercase gap-7 sm:w-[400px]">
           {/* Username */}
           <div>
             <small className="text-xs select-none">Username</small>
