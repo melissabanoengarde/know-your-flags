@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Game() {
   return (
-    <section className="w-full border border-red-200 subtract-header-height">
+    <section className="w-full subtract-header-height">
       <GameContainer>
         {/* <Intro /> */}
         <div className="border border-green-200 w-[300px] h-[300px] rounded-full bg-green-200" />
