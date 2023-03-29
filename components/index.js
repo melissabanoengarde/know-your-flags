@@ -13,6 +13,8 @@ import GameContainer from "./Game/GameContainer";
 import Tags from "./Game/Tags";
 import Intro from "./Game/Intro";
 import PlayContent from "./Game/PlayContent";
+import GameOver from "./Game/GameOver";
+import Board from "./Game/Board";
 // Home
 import HomeContainer from "./Root/HomeContainer";
 import Scene from "./Root/Scene";
@@ -34,4 +36,6 @@ export {
   PlayContent,
   HomeContainer,
   Scene,
+  GameOver,
+  Board,
 };

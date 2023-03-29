@@ -1,16 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Board from "./Board";
+import { Board, GameOver } from "@/components";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Image from "next/image";
 
 export default function PlayContent({ countries }) {
   const [score, setScore] = useState(0);
   const [tries, setTries] = useState(2);
-  const [time, setTime] = useState(60);
+  const [time, setTime] = useState(10);
   const [answer, setAnswer] = useState(null);
   const [guessList, setGuessList] = useState(null);
-  // const [correct, setCorrect] = useState(null);
+  const [gameover, setGameover] = useState(false);
 
   const handleRound = (e) => {
     const selected = e.target.innerHTML;
@@ -58,7 +59,7 @@ export default function PlayContent({ countries }) {
       }, 1000);
     } else {
       clearTimeout(intervalValue);
-      console.log("GAME OVERRRRRR");
+      setGameover(true);
     }
     return () => clearTimeout(intervalValue); // clears interval on update
   }, [time]);
@@ -68,20 +69,18 @@ export default function PlayContent({ countries }) {
     if (answer) {
       handleGuesses(answer);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answer]);
 
   useEffect(() => {
     generateAnswer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // console.log(correct);
 
   return (
     <>
       {!answer && !guessList ? (
-        <p>Loading.....</p>
+        <div className="text-6xl uppercase animate-spin">
+          <AiOutlineLoading3Quarters className="text-gray-400" />
+        </div>
       ) : (
         <>
           <Board score={score} tries={tries} time={time} />
@@ -111,6 +110,7 @@ export default function PlayContent({ countries }) {
                 </button>
               ))}
           </div>
+          {gameover && <GameOver score={score} setGameover={setGameover} />}
         </>
       )}
     </>

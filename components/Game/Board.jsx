@@ -1,9 +1,18 @@
-import React from "react";
+"use client";
+
+import useFetchUserInfo from "@/hooks/fetchUserInfo";
 
 export default function Board({ score, tries, time }) {
+  const { infos } = useFetchUserInfo();
+
   return (
-    <div className="w-full uppercase">
-      <ul className="grid grid-cols-3 text-sm text-gray-400 sm:text-md">
+    <div className="flex items-center justify-between w-full gap-2 text-gray-400 uppercase">
+      <div className="text-xs">
+        <p className="pb-1">Player: {infos.username}</p>
+        <p>Your highscore: 17</p>
+      </div>
+
+      <ul className="grid w-3/5 grid-cols-3 text-sm sm:text-md flex-8">
         <li>
           <small className="select-none ">Time</small>
           <p className="text-sm sm:text-xl">{time}</p>

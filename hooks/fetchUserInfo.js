@@ -10,7 +10,7 @@ import { doc, getDoc } from "firebase/firestore";
 export default function useFetchUserInfo() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [infos, setInfos] = useState({ username: "" });
+  const [infos, setInfos] = useState({ username: "", recentScore: "" });
 
   const { user } = UserAuth();
 
@@ -25,7 +25,12 @@ export default function useFetchUserInfo() {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setInfos({ ...infos, username: docSnap.data().username });
+          setInfos({
+            ...infos,
+            username: docSnap.data().username,
+            recentScore: docSnap.data().scores.recentScore,
+          });
+          console.log(infos);
         } else {
           setInfos(null);
         }

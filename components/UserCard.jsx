@@ -16,6 +16,7 @@ export default function UserCard() {
 
   const [username, setUsername] = useState("");
   const [updatedUsername, setUpdatedUsername] = useState("");
+  const [recentScore, setRecentScore] = useState("");
   const [editing, setEditing] = useState(false);
 
   const router = useRouter();
@@ -24,11 +25,12 @@ export default function UserCard() {
   useEffect(() => {
     setUsername(infos.username);
     setUpdatedUsername(infos.username);
+    setRecentScore(infos.recentScore);
 
     if (!user) {
       router.push("/login");
     }
-  }, [infos.username, user, router]);
+  }, [infos, user, router]);
 
   const updateDbUsername = async () => {
     const docRef = doc(db, "users", user.email);
@@ -108,6 +110,12 @@ export default function UserCard() {
           <div>
             <small className="text-xs select-none">Email</small>
             <p>{user.email}</p>
+          </div>
+
+          {/* Recent score */}
+          <div>
+            <small className="text-xs select-none">Recent score</small>
+            <p>{recentScore}</p>
           </div>
         </section>
       )}
