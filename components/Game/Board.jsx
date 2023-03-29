@@ -9,7 +9,7 @@ export default function Board({ score, tries, time }) {
     <div className="flex items-center justify-between w-full gap-2 text-gray-400 uppercase">
       <div className="text-xs">
         <p className="pb-1">Player: {infos.username}</p>
-        <p>Your highscore: 17</p>
+        <p>Your highscore: {infos.recentScore}</p>
       </div>
 
       <ul className="grid w-3/5 grid-cols-3 text-sm sm:text-md flex-8">

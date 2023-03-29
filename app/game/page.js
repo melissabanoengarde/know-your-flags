@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Game() {
   return (
     <section className="w-full text-gray-400 subtract-header-height">
-      <GameContainer>
+      <GameContainer intro="true">
         <div className="w-[500px] h-[500px]">
           <SceneContainer>
             <Scene />
