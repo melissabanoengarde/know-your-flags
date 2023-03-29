@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Drawer, Menu } from ".";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
+import { AnimatePresence, motion as m } from "framer-motion";
 
 import { UserAuth } from "@/context/AuthContext";
 
@@ -15,8 +16,13 @@ export default function Header() {
   // console.log(user);
 
   return (
-    <>
-      <header className="header-h w-full border-b-[1px] flex justify-between items-center px-5 md:px-8 lg:px-16 bg-white fixed top-0 left-0 z-20 text-gray-400 text-sm">
+    <AnimatePresence>
+      <m.header
+        className="header-h w-full border-b-[1px] flex justify-between items-center px-5 md:px-8 lg:px-16 bg-white fixed top-0 left-0 z-20 text-gray-400 text-sm"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 3 }}
+      >
         <h1 className="uppercase hover:bg-green-100">
           <Link href="/">Worldflags</Link>
         </h1>
@@ -52,11 +58,11 @@ export default function Header() {
             </li>
           </ul>
         </div>
-      </header>
+      </m.header>
 
       <Drawer open={open} isOpen={isOpen} />
       <Menu showMenu={showMenu} user={user} />
-    </>
+    </AnimatePresence>
   );
 }
 

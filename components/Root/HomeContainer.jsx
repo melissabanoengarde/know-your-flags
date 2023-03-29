@@ -2,14 +2,22 @@
 
 import { Canvas } from "@react-three/fiber";
 import Scene from "./Scene";
+import { AnimatePresence, motion as m } from "framer-motion";
 
 export default function HomeContainer() {
   return (
-    <div className="w-full h-[400px] sm:h-[50rem] ">
-      <Canvas>
-        <color attach="background" args={["white"]} />
-        <Scene />
-      </Canvas>
-    </div>
+    <AnimatePresence>
+      <m.div
+        className="w-full h-[400px] sm:h-[50rem]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 3 }}
+      >
+        <Canvas>
+          <color attach="background" args={["white"]} />
+          <Scene />
+        </Canvas>
+      </m.div>
+    </AnimatePresence>
   );
 }
