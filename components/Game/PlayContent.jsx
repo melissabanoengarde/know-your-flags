@@ -116,11 +116,3 @@ export default function PlayContent({ countries }) {
     </>
   );
 }
-
-// Gameover === 0s
-// Next round === 0 chances
-// Each round === 2 chances
-
-// Start with 30 seconds
-// When user scores correct => +5s, +1pt, 0 chances, next round
-// When user scores incorrect => -5s, -1px, -1 chance,

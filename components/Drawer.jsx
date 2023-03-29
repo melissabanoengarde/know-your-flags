@@ -52,7 +52,7 @@ export default function Drawer({ open, isOpen }) {
         </li>
         {user && (
           <li
-            className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100 border-t-[1px]"
+            className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100"
             onClick={handleLogout}
           >
             Logout

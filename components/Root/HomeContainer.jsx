@@ -38,7 +38,7 @@ export default function HomeContainer() {
             world.
           </p>
           <Link
-            className="border border-gray-200 py-1 px-20 hover:bg-gray-100 bg-white duration-100"
+            className="px-20 py-1 text-gray-400 uppercase duration-100 bg-white border border-gray-300 hover:bg-gray-300 hover:text-white active:bg-gray-300 active:text-white"
             href={user ? `/game` : `/login`}
           >
             Play

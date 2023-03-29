@@ -18,6 +18,7 @@ import Board from "./Game/Board";
 // Home
 import HomeContainer from "./Root/HomeContainer";
 import Scene from "./Root/Scene";
+import SceneContainer from "./Root/SceneContainer";
 
 export {
   Header,
@@ -36,6 +37,7 @@ export {
   PlayContent,
   HomeContainer,
   Scene,
+  SceneContainer,
   GameOver,
   Board,
 };
