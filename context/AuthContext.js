@@ -51,11 +51,18 @@ export const AuthContextProvider = ({ children }) => {
     try {
       const result = await signInWithPopup(auth, provider);
       GoogleAuthProvider.credentialFromResult(result);
+
+      // store username
+      const userRef = doc(db, "users", result.user.email);
+      await setDoc(userRef, {
+        username: result.user.displayName,
+      });
       // console.log("user in session", result.user);
       // console.log("acctoken", userCredential.accessToken);
     } catch (error) {
       const userCredential = GoogleAuthProvider.credentialFromError(error);
-      console.log(error, userCredential);
+      console.log("🟡 From AuthContext: ", error);
+      console.log(userCredential);
     }
   };
 
