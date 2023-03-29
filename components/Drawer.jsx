@@ -50,9 +50,6 @@ export default function Drawer({ open, isOpen }) {
         <li className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100 border-b-[1px]">
           <Link href="/countries">Review</Link>
         </li>
-        <li className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100">
-          <Link href="/about">About</Link>
-        </li>
         {user && (
           <li
             className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100 border-t-[1px]"

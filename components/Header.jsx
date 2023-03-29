@@ -31,9 +31,7 @@ export default function Header() {
             <li className="hover:bg-green-100">
               <Link href="/countries">Review</Link>
             </li>
-            <li className="hover:bg-green-100">
-              <Link href="/about">About</Link>
-            </li>
+
             {user && (
               <li className="hover:bg-green-100">
                 <Link href="/game">Play</Link>
