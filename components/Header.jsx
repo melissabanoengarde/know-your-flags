@@ -29,7 +29,7 @@ export default function Header() {
         <div className="items-center hidden md:flex ">
           <ul className="flex gap-5 uppercase">
             <li className="hover:bg-green-100">
-              <Link href="/countries">Review</Link>
+              <Link href="/countries">Countries</Link>
             </li>
 
             {user && (

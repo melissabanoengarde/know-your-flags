@@ -48,7 +48,7 @@ export default function Drawer({ open, isOpen }) {
           </li>
         )}
         <li className="px-5 py-1 uppercase cursor-pointer hover:bg-green-100 border-b-[1px]">
-          <Link href="/countries">Review</Link>
+          <Link href="/countries">Countries</Link>
         </li>
         {user && (
           <li

@@ -14,7 +14,7 @@ export default function Menu({ showMenu, user }) {
     <>
       {user && (
         <div
-          className={`hidden md:block fixed z-10 right-[1rem] duration-700 ease-in-out transition-top ${
+          className={`hidden md:block fixed z-10 right-[1rem] lg:right-[3rem] duration-700 ease-in-out transition-top ${
             showMenu ? `top-[40px]` : `top-[-1000px]`
           }`}
         >

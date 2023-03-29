@@ -8,7 +8,7 @@ export default function Footer() {
       <Link
         href="https://github.com/melissabanoengarde/know-your-flags"
         target="_blank"
-        className="hover:text-green-300"
+        className="hover:bg-green-100 duration-100"
       >
         GitHub
       </Link>{" "}
@@ -16,7 +16,7 @@ export default function Footer() {
       <Link
         href="https://github.com/melissabanoengarde"
         target="_blank"
-        className="hover:text-green-300"
+        className="hover:bg-green-100 duration-100"
       >
         MBG
       </Link>
