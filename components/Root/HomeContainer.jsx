@@ -31,9 +31,9 @@ export default function HomeContainer() {
           animate={{ opacity: 1 }}
           transition={{ duration: 2 }}
         >
-          <h2 className="text-7xl mb-3 lg:mb-0 lg:text-[10vmin]">WorldFlags</h2>
+          <h2 className="text-6xl mb-3 lg:mb-0 lg:text-[10vmin]">WorldFlags</h2>
           <p className="px-5 lg:px-0 md:w-[500px] lg:w-[400px] mx-auto lg:mx-0 text-sm mb-8 ">
-            Challenge your geographical prowess. Test your ability to identify
+            Challenge your geographical knowledge. Test your ability to identify
             the countries represented by a variety of flags from across the
             world.
           </p>

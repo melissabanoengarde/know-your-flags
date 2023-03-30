@@ -24,7 +24,7 @@ export default function Menu({ showMenu, user }) {
             </li>
             <li
               onClick={handleLogout}
-              className="py-1 px-4 text-right hover:bg-green-100 cursor-pointer"
+              className="px-4 py-1 text-right cursor-pointer hover:bg-green-100"
             >
               Logout
             </li>

@@ -16,6 +16,7 @@ import {
 
 import { db } from "@/config/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import useFetchUserInfo from "@/hooks/fetchUserInfo";
 
 const AuthContext = createContext();
 

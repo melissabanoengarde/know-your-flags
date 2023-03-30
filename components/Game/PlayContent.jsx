@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Board, GameOver } from "@/components";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Image from "next/image";
+import useFetchUserInfo from "@/hooks/fetchUserInfo";
 
 export default function PlayContent({ countries }) {
   const [score, setScore] = useState(0);
@@ -12,18 +13,19 @@ export default function PlayContent({ countries }) {
   const [answer, setAnswer] = useState(null);
   const [guessList, setGuessList] = useState(null);
   const [gameover, setGameover] = useState(false);
+  const { infos } = useFetchUserInfo();
 
   const handleRound = (e) => {
     const selected = e.target.innerHTML;
 
     if (selected === answer.name.common) {
       setScore(score + 1);
-      setTime(time + 5);
+      setTime(time + 3);
       // setCorrect(true);
       generateAnswer();
     } else {
       setScore(score - 1);
-      setTime(time - 5);
+      setTime(time - 3);
       // setCorrect(false);
       // if on the last (1) chance the answer is wrong... (to explain why condition is not at 0)
       if (tries === 1) {
@@ -83,7 +85,7 @@ export default function PlayContent({ countries }) {
         </div>
       ) : (
         <>
-          <Board score={score} tries={tries} time={time} />
+          <Board score={score} tries={tries} time={time} infos={infos} />
           <div className="relative w-full h-[14rem] sm:h-[18rem]">
             {/* <div
               className={`z-20 w-full h-full
@@ -92,7 +94,7 @@ export default function PlayContent({ countries }) {
             <Image
               src={answer && answer.flags.svg}
               fill={true}
-              className={`object-fill w-full h-auto border z-10`}
+              className={`object-fill w-full h-auto border z-[9]`}
               // TODO: display right click
               alt="Flag to guess!"
             />
@@ -110,7 +112,9 @@ export default function PlayContent({ countries }) {
                 </button>
               ))}
           </div>
-          {gameover && <GameOver score={score} setGameover={setGameover} />}
+          {gameover && (
+            <GameOver score={score} setGameover={setGameover} infos={infos} />
+          )}
         </>
       )}
     </>

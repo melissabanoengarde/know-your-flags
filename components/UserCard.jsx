@@ -16,7 +16,10 @@ export default function UserCard() {
 
   const [username, setUsername] = useState("");
   const [updatedUsername, setUpdatedUsername] = useState("");
-  const [recentScore, setRecentScore] = useState("");
+  // const [scores, setScores] = useState({
+  //   recentScore: "",
+  //   highScore: "",
+  // });
   const [editing, setEditing] = useState(false);
 
   const router = useRouter();
@@ -25,7 +28,11 @@ export default function UserCard() {
   useEffect(() => {
     setUsername(infos.username);
     setUpdatedUsername(infos.username);
-    setRecentScore(infos.recentScore);
+    // setScores({
+    //   ...scores,
+    //   recentScore: infos.recentScore,
+    //   highScore: infos.highScore,
+    // });
 
     if (!user) {
       router.push("/login");
@@ -114,8 +121,14 @@ export default function UserCard() {
 
           {/* Recent score */}
           <div>
+            <small className="text-xs select-none">High score</small>
+            <p>{infos.highScore}</p>
+          </div>
+
+          {/* Recent score */}
+          <div>
             <small className="text-xs select-none">Recent score</small>
-            <p>{recentScore}</p>
+            <p>{infos.recentScore}</p>
           </div>
         </section>
       )}

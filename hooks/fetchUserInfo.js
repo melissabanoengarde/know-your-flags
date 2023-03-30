@@ -10,7 +10,11 @@ import { doc, getDoc } from "firebase/firestore";
 export default function useFetchUserInfo() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [infos, setInfos] = useState({ username: "", recentScore: "" });
+  const [infos, setInfos] = useState({
+    username: "",
+    recentScore: null,
+    highScore: null,
+  });
 
   const { user } = UserAuth();
 
@@ -28,9 +32,10 @@ export default function useFetchUserInfo() {
           setInfos({
             ...infos,
             username: docSnap.data().username,
-            recentScore: docSnap.data().scores.recentScore,
+            recentScore: docSnap.data().recentScore,
+            highScore: docSnap.data().highScore,
           });
-          console.log(infos);
+          console.log("just executed!");
         } else {
           setInfos(null);
         }
@@ -43,7 +48,7 @@ export default function useFetchUserInfo() {
     };
 
     fetchData();
-  }, [user]);
+  }, [user, setInfos]);
 
   return { loading, error, infos, setInfos };
 }
